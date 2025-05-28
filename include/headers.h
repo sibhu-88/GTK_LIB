@@ -7,8 +7,8 @@
 #include <ctype.h>
 
 typedef struct {
+    int student_id;
     char name[100];
-    int id;
     char issue_date[100];
     char return_date[100];
 } issue;

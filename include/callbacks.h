@@ -9,4 +9,5 @@ void issueddetails_clicked(GtkListBox *listbox, GtkListBoxRow *row, GtkWidget *c
 void save_clicked(GtkListBox *listbox, GtkListBoxRow *row, GtkWidget *content_box);
 
 void add_book_callback(GtkWidget *widget, gpointer data);
-void issueBook_clicked(GtkWidget *button, gpointer user_data);
+void issueButton_clicked(GtkWidget *button, gpointer user_data);
+void returnBook_clicked(GtkWidget *button, gpointer user_data);

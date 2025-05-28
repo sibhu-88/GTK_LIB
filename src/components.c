@@ -43,8 +43,7 @@ GtkWidget *create_sidemenu(GtkWidget *content_box)
         {"Issue Book", "document-send-symbolic", G_CALLBACK(issuebook_clicked)},
         {"Return Book", "document-revert-symbolic", G_CALLBACK(returnbook_clicked)},
         {"Issued Details", "document-properties-symbolic", G_CALLBACK(issueddetails_clicked)},
-        {"Save", "document-save-symbolic", G_CALLBACK(save_clicked)}
-    };
+        {"Save", "document-save-symbolic", G_CALLBACK(save_clicked)}};
 
     // Add menu items to listbox
     for (int i = 0; i < G_N_ELEMENTS(menu_items); i++)
@@ -77,4 +76,24 @@ GtkWidget *create_sidemenu(GtkWidget *content_box)
     g_signal_connect(listbox, "row-selected", G_CALLBACK(row_selected_callback), content_box);
 
     return side_box;
+}
+
+void show_dialog(GtkMessageType type, const gchar *title, const gchar *icon_name, const gchar *message, const gchar *secondary)
+{
+    GtkWidget *dialog = gtk_message_dialog_new(
+        NULL,
+        GTK_DIALOG_MODAL,
+        type,
+        GTK_BUTTONS_OK,
+        "%s", message);
+
+    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(dialog), "%s", secondary);
+    gtk_window_set_title(GTK_WINDOW(dialog), title);
+    gtk_window_set_icon_name(GTK_WINDOW(dialog), icon_name);
+    gtk_window_set_resizable(GTK_WINDOW(dialog), FALSE);
+    gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
+    gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
+
+    gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_destroy(dialog);
 }
