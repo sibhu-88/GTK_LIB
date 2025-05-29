@@ -11,7 +11,6 @@ void save_all_data(Book *books)
         return;
     }
 
-    // Save book list to books_data.xls
     FILE *book_file = fopen("books_data.xls", "w");
 
     fprintf(book_file, "Book ID\tTitle\tAuthor\tCopies\tTotal Issues\n");
@@ -25,7 +24,6 @@ void save_all_data(Book *books)
     }
     fclose(book_file);
 
-    // Save issued book details to issued_books_data.xls
     FILE *issue_file = fopen("issued_books_data.xls", "w");
 
     fprintf(issue_file, "Book ID\tTitle\tStudent Name\tStudent ID\tIssue Date\tReturn Date\n");
@@ -46,12 +44,11 @@ void save_all_data(Book *books)
     }
     fclose(issue_file);
 
-    // ✅ Final single dialog on success
     GtkWidget *dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_OK,
                                                "All book data saved successfully.");
     gtk_window_set_title(GTK_WINDOW(dialog), "Save Complete");
     gtk_dialog_run(GTK_DIALOG(dialog));
     gtk_widget_destroy(dialog);
 
-    printf("Data saved to 'books_data.xls' and 'issued_books_data.xls'\n");
+    // printf("Data saved to 'books_data.xls' and 'issued_books_data.xls'\n");
 }

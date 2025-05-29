@@ -1,0 +1,14 @@
+* {
+    font-size: 16pt;
+    /* Increase global font size */
+}
+
+label {
+    font-size: 16pt;
+    font-weight: bold;
+    /* optional */
+}
+
+button {
+    font-size: 14pt;
+}

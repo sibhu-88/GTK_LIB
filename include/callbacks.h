@@ -11,3 +11,11 @@ void save_clicked(GtkListBox *listbox, GtkListBoxRow *row, GtkWidget *content_bo
 void add_book_callback(GtkWidget *widget, gpointer data);
 void issueButton_clicked(GtkWidget *button, gpointer user_data);
 void returnBook_clicked(GtkWidget *button, gpointer user_data);
+void deleteButton_clicked(GtkWidget *button, gpointer user_data);
+
+void sort_by_title_clicked(GtkWidget *button, gpointer user_data);
+void sort_by_author_clicked(GtkWidget *button, gpointer user_data);
+
+void on_profile_clicked(GtkWidget *widget, gpointer data);
+void on_settings_clicked(GtkWidget *widget, gpointer data);
+void on_search_book_clicked(GtkWidget *widget, gpointer data);

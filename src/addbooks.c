@@ -25,7 +25,7 @@ void add_book(GtkWidget *content_box, Book **books)
     title_label = gtk_label_new(NULL);
     gtk_label_set_markup(GTK_LABEL(title_label), title_markup);
     gtk_widget_set_halign(title_label, GTK_ALIGN_CENTER);
-    // gtk_box_pack_start(GTK_BOX(book_list_box), title_label, FALSE, FALSE, 5);
+    gtk_box_pack_start(GTK_BOX(book_list_box), title_label, FALSE, FALSE, 5);
     g_free(title_markup);
 
     book_title_label = gtk_label_new("Book Title:");
@@ -76,7 +76,6 @@ void add_book(GtkWidget *content_box, Book **books)
     gtk_widget_set_margin_start(gtk_grid_get_child_at(GTK_GRID(grid), 0, 4), 10);
     gtk_widget_set_margin_end(gtk_grid_get_child_at(GTK_GRID(grid), 0, 4), 10);
 
-    // Connect the add button to a function to handle adding the book
     GtkWidget **book_entries = malloc(5 * sizeof(GtkWidget *));
     book_entries[0] = book_title_entry;
     book_entries[1] = author_entry;
@@ -112,7 +111,6 @@ void add_book_callback(GtkWidget *widget, gpointer data)
 
     add_book_to_list(title, author, copy, books);
 
-    // Clear the entry fields
     gtk_entry_set_text(GTK_ENTRY(book_entries[0]), "");
     gtk_entry_set_text(GTK_ENTRY(book_entries[1]), "");
     gtk_entry_set_text(GTK_ENTRY(book_entries[2]), "");
@@ -136,11 +134,33 @@ void add_book_to_list(const char *title, const char *author, int copy, Book **bo
     new_book->copy = copy;
     new_book->issues = NULL;
 
-    printf("Adding Book ID:%d book: %s by %s with %d copies\n", new_book->book_id, new_book->title, new_book->author, new_book->copy);
-
-    if ((*books) == NULL)
+    int book_id = 1;
+    int id_found;
+    do
     {
-        new_book->book_id = 1;
+        id_found = 0;
+        Book *temp = *books;
+        while (temp != NULL)
+        {
+            if (temp->book_id == book_id)
+            {
+                id_found = 1;
+                break;
+            }
+            temp = temp->next;
+        }
+        if (id_found)
+        {
+            ++book_id;
+        }
+    } while (id_found);
+
+    new_book->book_id = book_id;
+
+    // printf("Adding Book ID:%d book: %s by %s with %d copies\n", new_book->book_id, new_book->title, new_book->author, new_book->copy);
+
+    if ((*books) == NULL || (*books)->book_id > new_book->book_id)
+    {
         new_book->next = *books;
         *books = new_book;
         return;
@@ -148,14 +168,13 @@ void add_book_to_list(const char *title, const char *author, int copy, Book **bo
     else
     {
         Book *current = *books;
-        while (current->next != NULL)
+        while (current->next != NULL && current->next->book_id < new_book->book_id)
         {
             current = current->next;
         }
-        new_book->book_id = current->book_id + 1;
+        new_book->next = current->next;
         current->next = new_book;
     }
-    new_book->next = NULL;
 }
 
 void restore_books_data(Book **books)
@@ -190,7 +209,6 @@ void restore_books_data(Book **books)
         new_book->issues = NULL;
         new_book->next = NULL;
 
-        // Append to the list
         if (*books == NULL)
         {
             *books = new_book;
@@ -205,9 +223,8 @@ void restore_books_data(Book **books)
     }
 
     fclose(book_file);
-    printf("Books loaded successfully from books_data.xls\n");
+    // printf("Books loaded successfully from books_data.xls\n");
 
-    // Now load issued data
     FILE *issue_file = fopen("issued_books_data.xls", "r");
     if (!issue_file)
     {
@@ -225,7 +242,6 @@ void restore_books_data(Book **books)
         sscanf(line, "%d\t%99[^\t]\t%99[^\t]\t%d\t%19[^\t]\t%19[^\n]",
                &book_id, title, name, &student_id, issue_date, return_date);
 
-        // Find corresponding book
         Book *current = *books;
         while (current)
         {
@@ -251,5 +267,5 @@ void restore_books_data(Book **books)
     }
 
     fclose(issue_file);
-    printf("Issued data loaded successfully from issued_books_data.xls\n");
+    // printf("Issued data loaded successfully from issued_books_data.xls\n");
 }

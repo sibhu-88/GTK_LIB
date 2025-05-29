@@ -114,6 +114,7 @@ void returnBook_clicked(GtkWidget *button, gpointer user_data)
         show_dialog(GTK_MESSAGE_WARNING, "Warning", "dialog-warning",
                     "Some fields are missing.",
                     "Please fill in all the required information.");
+        return;
     }
 
     unsigned int year, month, day;
@@ -142,8 +143,9 @@ void returnBook_clicked(GtkWidget *button, gpointer user_data)
         show_dialog(GTK_MESSAGE_ERROR, "Error", "dialog-error",
                     "Book Not found.",
                     "An unexpected error occurred while accessing the database.");
+        return;
     }
-    printf("Returning Book ID: %s by %s (ID: %s) on %s\n", book_id_text, student_name, student_id_text, return_date);
+    // printf("Returning Book ID: %s by %s (ID: %s) on %s\n", book_id_text, student_name, student_id_text, return_date);
 }
 
 void returnBook(GtkWidget *button, Book *book, int book_id, int student_id, const char *return_date)
@@ -158,7 +160,7 @@ void returnBook(GtkWidget *button, Book *book, int book_id, int student_id, cons
 
             if (book->issues[i].return_date && strcmp(book->issues[i].return_date, "N/A") != 0)
             {
-                printf("⚠️ Book already returned by student ID: %d\n", student_id);
+                // printf("⚠️ Book already returned by student ID: %d\n", student_id);
                 show_dialog(GTK_MESSAGE_ERROR, "Error", "dialog-error",
                             "Book already returned by the student.",
                             "This book has already been returned. No further action required.");
@@ -167,16 +169,17 @@ void returnBook(GtkWidget *button, Book *book, int book_id, int student_id, cons
             strncpy(book->issues[i].return_date, return_date, sizeof(book->issues[i].return_date));
             book->copy++;
 
-            printf("✅ Book returned by student ID: %d on %s\n", student_id, return_date);
+            // printf("✅ Book returned by student ID: %d on %s\n", student_id, return_date);
             break;
         }
     }
 
     if (!found)
     {
-        printf("❌ No issued book found for student ID: %d\n", student_id);
+        // printf("❌ No issued book found for student ID: %d\n", student_id);
         show_dialog(GTK_MESSAGE_ERROR, "Error", "dialog-error",
                     "No issued book found for the student.",
                     "An unexpected error occurred while accessing the database.");
+        return;
     }
 }

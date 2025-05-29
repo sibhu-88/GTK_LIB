@@ -1,4 +1,4 @@
-GtkWidget *create_headerbar();
+GtkWidget *create_headerbar(GtkWidget *content_box);
 GtkWidget *create_dashboard();
 GtkWidget *create_sidemenu(GtkWidget *content_box);
 void create_home(GtkWidget *container);
@@ -6,7 +6,8 @@ void add_book(GtkWidget *content_box, Book **books);
 void delete_book(GtkWidget *content_box, Book **books);
 void issue_book(GtkWidget *content_box, Book **books);
 void return_book(GtkWidget *content_box, Book **books);
-void sort_books(GtkWidget *content_box, Book *books);
+void sort_books_by_title(GtkWidget *content_box, Book *books);
+void sort_books_by_author(GtkWidget *content_box, Book *books);
 void books_list(GtkWidget *content_box, Book *books);
 void issued_details(GtkWidget *content_box, Book *books);
 void save_all_data(Book *books);
@@ -18,3 +19,7 @@ void returnBook(GtkWidget *button, Book *book, int book_id, int student_id, cons
 
 Book *find_book_by_id(Book *books, int book_id);
 void show_dialog(GtkMessageType type, const gchar *title, const gchar *icon_name, const gchar *message, const gchar *secondary);
+void delete_book_from_list(Book **books, int book_id);
+
+int nodecount(Book *books);
+void search_book(Book *books, const char *search_text);

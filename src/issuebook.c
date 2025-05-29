@@ -98,7 +98,7 @@ void issue_book(GtkWidget *content_box, Book **books)
     g_signal_connect(issue_button, "clicked", G_CALLBACK(issueButton_clicked), issue_entries);
 
     gtk_container_add(GTK_CONTAINER(content_box), issue_book_box);
-    gtk_widget_show_all(content_box); // Show all widgets in the container
+    gtk_widget_show_all(content_box);
 }
 
 void issueButton_clicked(GtkWidget *button, gpointer user_data)
@@ -124,7 +124,7 @@ void issueButton_clicked(GtkWidget *button, gpointer user_data)
     char issue_date[20];
     sprintf(issue_date, "%02d-%02d-%04d", day, month + 1, year);
 
-    printf("Issuing Book ID: %s to %s (ID: %s) on %s\n", book_id_text, student_name, student_id_text, issue_date);
+    // printf("Issuing Book ID: %s to %s (ID: %s) on %s\n", book_id_text, student_name, student_id_text, issue_date);
 
     int book_id = atoi(book_id_text);
     int student_id = atoi(student_id_text);
@@ -155,7 +155,7 @@ void issueBook_list(Book *book, int book_id, const char *name, int student_id, c
 
     if (book->copy <= 0)
     {
-        printf("No copies available for \"%s\".\n", book->title);
+        // printf("No copies available for \"%s\".\n", book->title);
 
         GtkWidget *error_dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
                                                          "No copies available for this book.");
@@ -167,9 +167,7 @@ void issueBook_list(Book *book, int book_id, const char *name, int student_id, c
         gtk_widget_destroy(error_dialog);
     }
 
-    // Reallocate memory for a new issue
     issue *new_issues = realloc(book->issues, sizeof(issue) * (book->total_issues + 1));
-
     book->issues = new_issues;
 
     issue *new_issue = &book->issues[book->total_issues];
@@ -181,7 +179,7 @@ void issueBook_list(Book *book, int book_id, const char *name, int student_id, c
     book->total_issues++;
     book->copy--;
 
-    printf("✅Book ID:%d Book \"%s\" issued to %s (ID: %d)\n", book->book_id, book->title, new_issue->name, new_issue->student_id);
+    // printf("✅Book ID:%d Book \"%s\" issued to %s (ID: %d)\n", book->book_id, book->title, new_issue->name, new_issue->student_id);
 }
 
 Book *find_book_by_id(Book *books, int book_id)
@@ -195,5 +193,5 @@ Book *find_book_by_id(Book *books, int book_id)
         }
         current = current->next;
     }
-    return NULL; // Book not found
+    return NULL;
 }
