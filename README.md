@@ -72,13 +72,13 @@ This modern application, crafted in C with a stunning GTK3 interface, empowers y
 
 Here are some screenshots showcasing the application's interface and features:
 
-![Dashboard](resources/Screenshot 1.png)
-![Add Book](resources/Screenshot 2.png)
-![Books List](resources/Screenshot 3.png)
-![Sort Books](resources/Screenshot 4.png)
-![Delete Book](resources/Screenshot 5.png)
-![Issue Book](resources/Screenshot 6.png)
-![Return Book](resources/Screenshot 7.png)
+![Dashboard](resources/Screenshot%201.png)
+![Add Book](resources/Screenshot%202.png)
+![Books List](resources/Screenshot%203.png)
+![Sort Books](resources/Screenshot%204.png)
+![Delete Book](resources/Screenshot%205.png)
+![Issue Book](resources/Screenshot%206.png)
+![Return Book](resources/Screenshot%207.png)
 
 
 ### 🚀 Requirements
