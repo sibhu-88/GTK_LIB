@@ -118,6 +118,7 @@ void search_book(Book *books, const char *search_text)
             gtk_window_set_icon_name(GTK_WINDOW(dialog), "dialog-information");
             gtk_window_set_resizable(GTK_WINDOW(dialog), FALSE);
             gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
+            gtk_widget_set_size_request(dialog, 300, 60);
             gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
             gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_OK);
             gtk_window_set_title(GTK_WINDOW(dialog), "Book Found");
@@ -125,7 +126,9 @@ void search_book(Book *books, const char *search_text)
                                                                  temp->title,
                                                                  temp->author,
                                                                  temp->copy));
+                                                                 
             gtk_box_pack_start(GTK_BOX(gtk_dialog_get_content_area(GTK_DIALOG(dialog))), book_info, FALSE, FALSE, 0);
+
 
             gtk_widget_show_all(dialog);
             gtk_dialog_run(GTK_DIALOG(dialog));

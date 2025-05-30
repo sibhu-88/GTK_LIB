@@ -25,7 +25,7 @@ void add_book(GtkWidget *content_box, Book **books)
     title_label = gtk_label_new(NULL);
     gtk_label_set_markup(GTK_LABEL(title_label), title_markup);
     gtk_widget_set_halign(title_label, GTK_ALIGN_CENTER);
-    gtk_box_pack_start(GTK_BOX(book_list_box), title_label, FALSE, FALSE, 5);
+    gtk_box_pack_start(GTK_BOX(add_book_box), title_label, FALSE, FALSE, 5);
     g_free(title_markup);
 
     book_title_label = gtk_label_new("Book Title:");
