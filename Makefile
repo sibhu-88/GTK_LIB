@@ -14,6 +14,6 @@ run: $(TARGET)
 	$(TARGET)
 
 clean:
-	rm -fr $(TARGET) src/*.o
+	rm -fr $(TARGET) src/*.o *.xls
 
 .PHONY: all clean run
